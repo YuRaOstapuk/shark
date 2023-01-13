@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shark</title>
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
       }
       html,
       body,
@@ -17,29 +25,54 @@
         height: 100%;
       }
       .sidebar {
-        width: 170px;
+        width: 200px;
         background: #f3f5f7;
+        /* display: flex;
+        flex-direction: column;
+        justify-content: space-between; */
       }
       .inbox {
-        width: 150px;
+        width: 380px;
         background: #ffffff;
       }
       .chat {
-        width: calc(100% - 300px);
+        width: calc(100% - 500px);
         background: #f2f2f6;
       }
       .panel {
-        width: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 37px;
+        width: 60px;
         background: #ffffff;
       }
       .wrapper {
         display: flex;
+        justify-content: center;
       }
-      .sidebar_info {
-        padding: 10px;
-
+      .sidebar_up {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+      }
+      .sidebar_logo {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-right: 40px;
+        margin-top: 7px;
+      }
+      .sidebar_info {
+        padding: 13px;
+        margin: 2px;
+
+        justify-content: space-between;
+        flex-direction: column;
+        position: static;
       }
       .info {
         margin-top: 30%;
@@ -47,42 +80,830 @@
         font-weight: 25px;
         margin-left: 28%;
       }
-      .sidebar_title {
-        margin-left: 28%;
-      }
+
       .sidebar_project {
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      .logo {
+        height: 40px;
+      }
+      .sidebar_project_title {
+        text-transform: uppercase;
+        font-size: 11px;
+        color: grey;
+        margin-left: 10px;
+      }
+      .sidebar_pro_icons {
+        border: 2px solid;
+        padding: 6px;
+        border-radius: 35%;
+      }
+      .sidebar_pro_item,
+      .sidebar_pro_item_sub {
+        gap: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px;
+      }
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+      .fiolet {
+        color: blueviolet;
+      }
+      .green {
+        color: green;
+      }
+      .sidebar_project_amount {
+        background: #e7e9ef;
+        border: 5px solid #e7e9ef;
+        border-radius: 25%;
+      }
+      .sidebar_project_button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .pro_butt {
         margin-top: 50px;
-        gap: 50px;
-        margin-left: 28%;
+        color: grey;
+        padding: 5px 35px;
+        border-radius: 14px;
+        border: 3px solid #e7e9ef;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .sidebar_project_amount {
+        color: grey;
+      }
+      .sidebar_project_name {
+        font-size: 15px;
+      }
+      .info_icon {
+        font-size: large;
+        color: black;
+      }
+      .inbox_add {
+        justify-content: space-between;
+        display: flex;
+        position: relative;
+      }
+      .add {
+        background: #fdfdfd;
+        border-radius: 20%;
+        border: 1px solid #f6f6f6;
+        padding: 6px 9px;
+      }
+      .inbox_add {
+        padding: 5px;
+      }
+      .inbox_title {
+        margin-left: 15px;
+      }
+      .add {
+        font-size: 15px;
+      }
+      .avatar_image {
+        border-radius: 20px;
+      }
+      .avatar_indicator {
+        background: green;
+        height: 15px;
+        aspect-ratio: 1;
+        display: flex;
+        width: 15px;
+        border-radius: 50%;
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        border: 3px solid white;
+      }
+      .avatar {
+        width: 80px;
+        aspect-ratio: 1;
+        position: relative;
+        line-height: 0;
+      }
+      .inbox_avatar_only_Michael {
+        height: 100px;
+        background: #e7eaed;
+        border-radius: 10px 10px 10px 10px;
+      }
+      .inbox_avatar_only_Katie{
+        margin-top: 10px;
+        height: 100px;
+        background: #e7eaed;
+        border-radius: 10px 10px 10px 10px;
+      }
+      .inbox_avatar {
+        display: flex;
+        flex-direction: column;
+      }
+      .project_man {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 15px;
+
+        gap: 3px;
+      }
+      .project_man_info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+      .message_indicator_Michael {
+        color: #f2f2f6;
+        display: flex;
+        justify-content: center;
+        background: #4a69da;
+        height: 25px;
+        width: 25px;
+        position: absolute;
+        display: flex;
+        border-radius: 50%;
+        border: 3px solid #4a69da;
+        margin-top: 20px;
+        margin-left: 60px;
+      }
+      .message_indicator_Katie {
+        color: #f2f2f6;
+        display: flex;
+        justify-content: center;
+        background: #4a69da;
+        height: 25px;
+        width: 25px;
+        position: absolute;
+        display: flex;
+        border-radius: 50%;
+        border: 3px solid #4a69da;
+        margin-top: 20px;
+        margin-left: 40px;
+      }
+      .inbox_general_total {
+        display: flex;
+        background: #eff2f5;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        width: 340px;
+       
+      }
+      .inbox_general {
+        height: 25px;
+        width: 175px;
+        background-color: #ffffff;
+        border-radius: 10px 10px 10px 10px;
+        border: 1px solid grey;
+        font-size: 15px;
+      }
+      .inbox_total {
+        background-color: #f3f5f7;
+        width: 165px;
+        border-radius: 10px 10px 10px 10px;
+        border: none;
+        font-size: 15px;
+      }
+      .inbox_avatar_main {
+        margin-top: 10px;
+      }
+      .Michael_job_title,
+      .Katie_job_title,
+      .Arnold_job_title,
+      .Fannie_job_title,
+      .Isaak_job_title,
+      .Jacob_job_title,
+      .chat_status {
+        color: #ced2d6;
+      }
+      .chat_man_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        padding: 5px;
+        gap: 10px;
+      }
+      .chat_status {
+        font-weight: 600;
+        font-size: 10px;
+      }
+      .chat_man_Michael {
+        font-weight: 800;
+        font-size: 20px;
+      }
+      .search {
+        margin-top: 40px;
+        border: 1px solid black;
+        height: 35px;
+        width: 40%;
+        background: lightgray;
+        border-radius: 12px;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 190px;
+      }
+      .search_input:focus {
+        outline: none;
+      }
+      .search_input {
+        border: none;
+        background: none;
+      }
+      .search_button {
+        font-size: 20px;
+        color: #899198;
+        border: none;
+        background: none;
+      }
+      .chat_top {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid grey;
+      }
+      .project_man_chat_Michael {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 15px;
+      
+        gap: 5px;
+      }
+      .voice_message {
+        border: 1px solid grey;
+        border-radius: 10px 10px 10px 10px;
+        background-color: #fefefe;
+        height: 35px;
+        width: 35px;
+        margin-left: 5px;
+        font-size: 20px;
+        color: #899198;
+      }
+      .video_message {
+        color: #899198;
+        border: 1px solid grey;
+        border-radius:10px 10px 10px 10px  ;
+        background: #fefefe;
+        height: 35px;
+        width: 35px;
+        margin-left: 10px;
+        font-size: 20px;
+      }
+      .button_voice_video {
+        height: 50px;
+        width: 100px;
+        margin-top: 40px;
+      }
+      .chat_date {
+        margin-left: 15px;
+        text-align: left;
+        color: #abb0b9;
+      }
+      .chat_time {
+        margin-right: 15px;
+        text-align: right;
+        color: #abb0b9;
+      }
+      .chat_message_hello {
+        width: 80px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px 10px 0px 10px;
+        background: #fefefe;
+        border: none;
+        margin-top: 10px;
+      }
+      .chat_message_main_hello {
+        margin-right: 15px;
+        display: flex;
+        justify-content: right;
+      }
+      .voice_message_one {
+        text-align: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 67%;
+        margin-right: 15px;
+        border: none;
+        border-radius: 10px 10px 0px 10px;
+        background: white;
+        margin-top: 10px;
+      }
+      .voice_message_add {
+        color: #abb0b9;
+        margin-right: 20px;
+        text-align: right;
+      }
+      .chat_message_main_hi {
+        display: flex;
+        align-items: center;
+      }
+      .message_hi {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ebecef;
+        height: 40px;
+        width: 65px;
+        border-radius: 10px 10px 10px 0px;
+        margin-left: 15px;
+      }
+      .chat_time_two {
+        margin-left: 15px;
+        color: #abb0b9;
+        margin-bottom: 10px;
+      }
+      .voice_message_two {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 67%;
+        border: none;
+        background: #ebecef;
+        border-radius: 10px 10px 10px 0px;
+        margin-left: 15px;
+        margin-top: 10px;
+      }
+      .chat_message_text {
+        display: flex;
+        justify-content: center;
+        border-radius: 10px 10px 0px 10px;
+        height: 50px;
+        width: 280px;
+        border: none;
+        background: white;
+        margin-left: 69%;
+        margin-top: 10px;
+      }
+      .chat_time_three {
+        color: #abb0b9;
+        text-align: right;
+        margin-right: 15px;
+      }
+      .message_text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .chat_time_four {
+        color: #abb0b9;
+        margin-left: 15px;
+        margin-bottom: 10px;
+      }
+
+      .chat_message_text_two {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: white;
+        height: 40px;
+        width: 60px;
+        margin-left: 15px;
+        border-radius: 10px 10px 10px 0px;
+        background: #ebecef;
+      }
+      .chat_message_file {
+        display: flex;
+        border: none;
+        background: white;
+        height: 60px;
+        width: 110px;
+        border-radius: 10px 10px 10px 0px;
+        margin-left: 15px;
+        background: #ebecef;
+        margin-top: 10px;
+      }
+      .file_size {
+        font-size: xx-small;
+        margin-left: 9px;
+        color: #abb0b9;
+      }
+      .brief_doc {
+        font-size: smaller;
+        margin-top: 10px;
+      }
+      .message_file {
+        padding: 5px;
+      }
+      .chat__input {
+        border-top: 1px solid grey;
+        width: 100%;
+        height: 400%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .search_button_pict,
+      .search_button_voice,
+      .search_button_send {
+        background: none;
+        height: 30px;
+        aspect-ratio: 1;
+        border: 1px solid grey;
+        border-radius: 10px;
+        font-size: 23px;
+        color: #899198;
+      }
+      .search_button_send {
+        color: white;
+        background: #4a69da;
+      }
+      .voice_message_one_time{
+        font-size: smaller;
+      }
+      .voice_message_two_time{
+        font-size: smaller;
+      }
+
+      .panel_button {
+        background: none;
+        height: 30px;
+        aspect-ratio: 1;
+        border: 1px solid grey;
+        border-radius: 10px;
+        font-size: 22px;
+        color: #899198;
+      }
+      .panel_button_down {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .panel_button_only {
+        background: none;
+        height: 30px;
+        aspect-ratio: 1;
+        border: 1px solid grey;
+        border-radius: 10px;
+        font-size: 20px;
+        color: black;
+      }
+
+      .input_down {
+        outline: none;
+        background: none;
+        border: none;
+        width: 100%;
+      }
+      .chat__input_button {
+        display: flex;
+        gap: 20px;
       }
     </style>
   </head>
   <body>
     <div class="wrapper">
       <aside class="sidebar">
-        <figure class="sidebar_icon">
-          <h4 class="sidebar_title">Shark</h4>
-        </figure>
-        <div class="sidebar_info">
-          <p class="info"><a class="info_icon" href=""></a> Dashboard</p>
-          <p class="info"><a class="info_icon" href=""></a>Statistic</p>
-          <p class="info"><a class="info_icon" href=""></a>Support</p>
-          <p class="info"><a class="info_icon" href=""></a>Inbox</p>
-          <p class="info"><a class="info_icon" href=""></a>Goals</p>
-          <p class="info"><a class="info_icon" href=""></a>Links</p>
+        <div class="sidebar_up">
+          <div class="sidebar_logo">
+            <img class="logo" src="https://via.placeholder.com/40x40" alt="" />
+            <h3 class="sidebar_title">Shark</h3>
+          </div>
+
+          <div class="sidebar_info">
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="lab la-buffer"></i>
+
+                <a href="" class="info_icon">Dashbord</a>
+              </span>
+            </li>
+
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="las la-poll"></i>
+                <a href="" class="info_icon">Statistic</a>
+              </span>
+            </li>
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="las la-apple"></i>
+              </span>
+              <a href="" class="info_icon">Support</a>
+            </li>
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="las la-twitter"></i>
+              </span>
+              <a href="" class="info_icon">Inbox</a>
+            </li>
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="las la-comment-alt"></i>
+              </span>
+              <a href="" class="info_icon">Goals</a>
+            </li>
+            <li class="sidebar_info">
+              <span class="info_icon">
+                <i class="las la-comment-alt"></i>
+              </span>
+              <a href="" class="info_icon">Links</a>
+            </li>
+          </div>
         </div>
         <div class="sidebar_project">
-          <p class="project">Collipso</p>
-          <p class="project">BWS bank</p>
-          <p class="project">Unicorn app</p>
-          <p class="project">Solt</p>
+          <h4 class="sidebar_project_title">projects</h4>
+          <div class="sidebar_project_items">
+            <div class="sidebar_pro_item">
+              <div class="sidebar_pro_item_sub">
+                <span class="sidebar_pro_icons red">
+                  <p></p>
+                </span>
+                <p class="sidebar_project_name">Collipso</p>
+              </div>
+              <div class="sidebar_project_amount">
+                <a href="" class="sidebar_project_amount">+4</a>
+              </div>
+            </div>
+            <div class="sidebar_project_items">
+              <div class="sidebar_pro_item">
+                <div class="sidebar_pro_item_sub">
+                  <span class="sidebar_pro_icons blue">
+                    <p></p>
+                  </span>
+                  <p class="sidebar_project_name">BWS Bank</p>
+                </div>
+                <div class="sidebar_project_amount">
+                  <a href="" class="sidebar_project_amount">+5</a>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar_project_items">
+              <div class="sidebar_pro_item">
+                <div class="sidebar_pro_item_sub">
+                  <span class="sidebar_pro_icons fiolet">
+                    <p></p>
+                  </span>
+                  <p class="sidebar_project_name">Unicorn app</p>
+                </div>
+                <div class="sidebar_project_amount">
+                  <a href="" class="sidebar_project_amount">+1</a>
+                </div>
+              </div>
+            </div>
+            <div class="sidebar_project_items">
+              <div class="sidebar_pro_item">
+                <div class="sidebar_pro_item_sub">
+                  <span class="sidebar_pro_icons green">
+                    <p></p>
+                  </span>
+                  <p class="sidebar_project_name">Solt</p>
+                </div>
+                <div class="sidebar_project_amount">
+                  <a href="" class="sidebar_project_amount">+3</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar_project_button">
+            <button class="pro_butt">Show more</button>
+          </div>
         </div>
       </aside>
-      <div class="inbox">1</div>
-      <div class="chat">1</div>
-      <div class="panel">1</div>
+      <div class="inbox">
+        <div class="inbox_add">
+          <h2 class="inbox_title">Inbox</h2>
+          <div class="inbox_button">
+            <button class="add">+</button>
+          </div>
+        </div>
+        <div class="inbox_general_total">
+          <button class="inbox_general">General</button>
+          <button class="inbox_total">Total</button>
+        </div>
+
+        <div class="inbox_avatar_main">
+          <div class="inbox_avatar_only_Michael">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+                <span class="avatar_indicator"></span>
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Michael">Michael B.</h4>
+                <h6 class="Michael_job_title">Project manager</h6>
+                <p class="Michael_subinf">Sent you the file</p>
+              </div>
+              <figure class="message_amount">
+                <span class="message_indicator_Michael">2</span>
+              </figure>
+            </div>
+          </div>
+          <div class="inbox_avatar_only_Katie">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+                <span class="avatar_indicator"></span>
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Katie">Katie.W</h4>
+                <h6 class="Katie_job_title">Middle desigher</h6>
+                <p class="Katie_subinf">See you tomorrow..</p>
+              </div>
+              <figure class="message_amount">
+                <span class="message_indicator_Katie">3</span>
+              </figure>
+            </div>
+          </div>
+          <div class="inbox_avatar">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Arnold">Arnold.J</h4>
+                <h6 class="Arnold_job_title">UI desigher</h6>
+                <p class="Arnold_subinf">Hi checked the layout again</p>
+              </div>
+            </div>
+          </div>
+          <div class="inbox_avatar">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+                <span class="avatar_indicator"></span>
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Fannie">Fannie.K</h4>
+                <h6 class="Fannie_job_title">HR manager</h6>
+                <p class="Fannie_subinf">Sent you the file</p>
+              </div>
+            </div>
+          </div>
+          <div class="inbox_avatar">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Isaak">Isaak.A</h4>
+                <h6 class="Isaak_job_title">SMM manager</h6>
+                <p class="Isaak_subinf">I don't think we're going to finish</p>
+              </div>
+            </div>
+          </div>
+          <div class="inbox_avatar">
+            <div class="project_man">
+              <figure class="avatar">
+                <img
+                  src="https://via.placeholder.com/80x80"
+                  alt=""
+                  class="avatar_image"
+                />
+                <span class="avatar_indicator"></span>
+              </figure>
+              <div class="project_man_info">
+                <h4 class="project_man_Jacob">Jacob</h4>
+                <h6 class="Jacob_job_title">UX desigher</h6>
+                <p class="Jacob_subinf">Sorry,Friend I wan't do it again</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="chat_top">
+          <div class="project_man_chat_Michael">
+            <figure class="avatar">
+              <img
+                src="https://via.placeholder.com/80x80"
+                alt=""
+                class="avatar_image"
+              />
+              <span class="avatar_indicator"></span>
+            </figure>
+            <div class="chat_man_info">
+              <h4 class="chat_man_Michael">Michael B.</h4>
+              <h6 class="chat_status">Online</h6>
+            </div>
+          </div>
+          <form class="search">
+            <input class="search_input" type="text" /><button
+              class="search_button"
+            >
+              <i class="las la-search"></i>
+            </button>
+          </form>
+          <form class="button_voice_video">
+            <button class="voice_message">
+              <i class="las la-microphone"></i>
+            </button>
+            <button class="video_message"><i class="las la-video"></i></button>
+          </form>
+        </div>
+        <div class="chat_message">
+          <p class="chat_date">July 29 , Tuesday</p>
+          <p class="chat_time">12:25</p>
+          <div class="chat_message_main_hello">
+            <p class="chat_message_hello">Hello!</p>
+          </div>
+          <div class="chat_voice_message">
+            <figure class="voice_message_one">
+              <i class="las la-play"></i>
+              <img src="https://via.placeholder.com/250x40" alt="" />
+              <p class="voice_message_one_time">00:16</p>
+            </figure>
+            <p class="voice_message_add">VIEWED AD</p>
+          </div>
+          <p class="chat_time_two">12:28</p>
+          <div class="chat_message_main_hi"><p class="message_hi">Hi !</p></div>
+          <figure class="voice_message_two">
+            <i class="las la-play"></i>
+            <img src="https://via.placeholder.com/250x40" alt="" />
+            <p class="voice_message_one_time">00:16</p>
+          </figure>
+          <p class="chat_time_three">12:29</p>
+          <div class="chat_message_text">
+            <p class="message_text">Okay ,thank you very much for the speed</p>
+          </div>
+          <p class="voice_message_add">VIEWED AD</p>
+          <p class="chat_time_four">12:30</p>
+          <div class="chat_message_text_two">
+            <p class="message_text_two">Catch</p>
+          </div>
+          <div class="chat_message_file">
+            <figure class="message_file">
+              <img src="https://via.placeholder.com/40x40" alt="" />
+            </figure>
+            <div class="file_setting">
+              <p class="brief_doc">Brief.doc</p>
+              <p class="file_size">148 KB</p>
+            </div>
+          </div>
+          <div class="chat__input">
+            <div class="chat_input_message">
+              <p class="text_message">Write a massage...</p>
+            </div>
+            <form class="chat_input_down">
+              <input class="input_down" type="text" />
+            </form>
+            <form class="chat_input_button">
+              <button class="search_button_pict">
+                <i class="las la-image"></i>
+              </button>
+              <button class="search_button_voice">
+                <i class="las la-microphone"></i>
+              </button>
+              <button class="search_button_send">
+                <i class="las la-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <button class="panel_button_only">
+          <i class="las la-ellipsis-h"></i>
+        </button>
+        <form class="panel_button_down">
+          <button class="panel_button">
+            <i class="las la-exclamation-circle"></i>
+          </button>
+          <button class="panel_button">
+            <i class="las la-bell-slash"></i>
+          </button>
+          <button class="panel_button">
+            <i class="las la-trash-alt"></i>
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
